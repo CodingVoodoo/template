@@ -1,8 +1,6 @@
 version: 2
 jobs:
   build:
-    docker:
-      - image: circleci/openjdk:11.0.5-jdk
 
     working_directory: ~/template
 
