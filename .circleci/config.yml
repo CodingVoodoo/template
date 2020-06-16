@@ -1,5 +1,6 @@
 version: 2
 orbs:
+  aws-ecr: circleci/aws-ecr@6.9.1
   aws-ecs: circleci/aws-ecs@1.2.0
 jobs:
   build:
