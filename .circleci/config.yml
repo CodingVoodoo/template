@@ -22,7 +22,7 @@ workflows:
           tag: "$CIRCLE_SHA1"
       - aws-ecs/deploy-service-update:
           requires:
-            - aws-ecr/build-image
+            - aws-ecr/build-and-push-image
           aws-region: AWS_DEFAULT_REGION
           family: 'template-service'
           cluster-name: 'template-cluster'
