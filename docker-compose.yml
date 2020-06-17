@@ -1,0 +1,10 @@
+version: '3'
+services:
+  dbpostgres:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: "templateUser"
+      POSTGRES_PASSWORD: "templatePassword"
+      POSTGRES_DB: "templateDb"
