@@ -16,7 +16,7 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - aws-ecr/build-image:
+      - aws-ecr/build-and-push-image:
           dockerfile: Dockerfile
           repo: template
           tag: "$CIRCLE_SHA1"
