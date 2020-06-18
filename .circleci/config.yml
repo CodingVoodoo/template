@@ -12,6 +12,10 @@ workflows:
       - aws-ecr/build-and-push-image:
           requires:
             - build-test
+          filters:
+            branches:
+              only:
+                - master
           dockerfile: Dockerfile
           create-repo: true
           repo: template
@@ -19,6 +23,10 @@ workflows:
       - aws-ecs/deploy-service-update:
           requires:
             - aws-ecr/build-and-push-image
+          filters:
+            branches:
+              only:
+                - master
           aws-region: $AWS_REGION
           family: 'first-run-task-definition'
           cluster-name: 'default'
