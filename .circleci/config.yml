@@ -5,13 +5,13 @@ orbs:
   aws-ecs: circleci/aws-ecs@1.2.0
 workflows:
   version: 2
-  build-test:
+  main-workflow:
     jobs:
       - maven/test:
           name: build-test
-  build-and-deploy:
-    jobs:
       - aws-ecr/build-and-push-image:
+          requires:
+            - build-test
           dockerfile: Dockerfile
           create-repo: true
           repo: template
