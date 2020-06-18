@@ -22,5 +22,5 @@ workflows:
           aws-region: $AWS_REGION
           family: 'first-run-task-definition'
           cluster-name: 'default'
-          service-name: "${CIRCLE_PROJECT_REPONAME}-service"
+          service-name: "template"
           container-image-name-updates: 'container=template-service,tag=${CIRCLE_SHA1}'
