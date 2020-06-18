@@ -19,7 +19,7 @@ workflows:
       - aws-ecs/deploy-service-update:
           requires:
             - aws-ecr/build-and-push-image
-          aws-region: AWS_REGION
+          aws-region: $AWS_REGION
           family: 'template-service'
           cluster-name: 'template-cluster'
           container-image-name-updates: 'container=template-service,tag=${CIRCLE_SHA1}'
