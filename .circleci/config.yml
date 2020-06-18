@@ -21,5 +21,5 @@ workflows:
             - aws-ecr/build-and-push-image
           aws-region: $AWS_REGION
           family: 'template-service'
-          cluster-name: 'template-cluster'
+          cluster-name: 'default'
           container-image-name-updates: 'container=template-service,tag=${CIRCLE_SHA1}'
