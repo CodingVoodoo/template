@@ -1,29 +1,25 @@
 version: 2.1
 orbs:
+  maven: circleci/maven@1.0.1
   aws-ecr: circleci/aws-ecr@6.9.1
   aws-ecs: circleci/aws-ecs@1.2.0
-jobs:
-  build:
-    docker:
-      - image: circleci/openjdk:11.0.1-jdk
-
-    working_directory: ~/template
-
-    steps:
-      - checkout
-      - run: mvn clean install
 workflows:
   version: 2
+  build-test:
+    jobs:
+      - maven/test:
+          name: build-test
   build-and-deploy:
     jobs:
       - aws-ecr/build-and-push-image:
           dockerfile: Dockerfile
+          create-repo: true
           repo: template
           tag: "$CIRCLE_SHA1"
       - aws-ecs/deploy-service-update:
           requires:
             - aws-ecr/build-and-push-image
-          aws-region: AWS_DEFAULT_REGION
+          aws-region: AWS_REGION
           family: 'template-service'
           cluster-name: 'template-cluster'
           container-image-name-updates: 'container=template-service,tag=${CIRCLE_SHA1}'
