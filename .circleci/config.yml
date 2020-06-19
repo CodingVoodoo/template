@@ -9,26 +9,26 @@ workflows:
     jobs:
       - maven/test:
           name: build-test
-      - aws-ecr/build-and-push-image:
-          requires:
-            - build-test
-          filters:
-            branches:
-              only:
-                - master
-          dockerfile: Dockerfile
-          create-repo: true
-          repo: template
-          tag: "$CIRCLE_SHA1"
-      - aws-ecs/deploy-service-update:
-          requires:
-            - aws-ecr/build-and-push-image
-          filters:
-            branches:
-              only:
-                - master
-          aws-region: $AWS_REGION
-          family: 'first-run-task-definition'
-          cluster-name: 'default'
-          service-name: "template"
-          container-image-name-updates: 'container=template-service,tag=${CIRCLE_SHA1}'
+#      - aws-ecr/build-and-push-image:
+#          requires:
+#            - build-test
+#          filters:
+#            branches:
+#              only:
+#                - master
+#          dockerfile: Dockerfile
+#          create-repo: true
+#          repo: template
+#          tag: "$CIRCLE_SHA1"
+#      - aws-ecs/deploy-service-update:
+#          requires:
+#            - aws-ecr/build-and-push-image
+#          filters:
+#            branches:
+#              only:
+#                - master
+#          aws-region: $AWS_REGION
+#          family: 'first-run-task-definition'
+#          cluster-name: 'default'
+#          service-name: "template"
+#          container-image-name-updates: 'container=template-service,tag=${CIRCLE_SHA1}'
